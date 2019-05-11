@@ -2,6 +2,7 @@ class Screen(object):
     """description of class"""
 
 import Adafruit_CharLCD as LCD
+import time as timeExec
 # Raspberry Pi pin setup
 lcd_rs = 18
 lcd_en = 23
@@ -28,9 +29,9 @@ def textmessagerecieved(line1,line2):
         for i in range(0, chardiffLine2 + 1):
             lcd.clear()
             lcd.message("{}\n{}".format((line1).center(16),line2[i:16 + i]))
-            time.sleep(0.6)
+            timeExec.sleep(0.6)
     else:
         lcd.clear()
         lcd.message("{}\n{}".format((line1).center(16),(line2).center(16)))
-    time.sleep(20)
+    timeExec.sleep(20)
     display = False

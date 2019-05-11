@@ -13,16 +13,16 @@ humi = []
 reading = False
 
 def temperatureHumidityReading():
-    if not reading:
-       reading = True
-       temp = []
-       humi = []
-       for i in range(0,3,1):
-           umi, tem = Adafruit_DHT.read_retry(DHT11, DHT11_PIN, retries=2, delay_seconds=1) 
-           if umi is not None and tem is not None:
-               temp.append(tem)
-               humi.append(umi)
-       reading = False
+     if not reading:
+        reading = True
+        temp = []
+        humi = []
+        for i in range(0,3,1):
+            umi, tem = Adafruit_DHT.read_retry(DHT11, DHT11_PIN, retries=2, delay_seconds=1) 
+            if umi is not None and tem is not None:
+                temp.append(tem)
+                humi.append(umi)
+        reading = False
 
 def getTemperature():
     if len(temp) > 0:

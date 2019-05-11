@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>47131286-1f32-447f-acea-e4bd7f59138e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ResourceManagerDemon.py</StartupFile>
+    <StartupFile>client.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,11 +22,20 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="client.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Message.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ResourceManagerDemon.py" />
     <Compile Include="Screen.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SSLMessage.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SSLMessageEncoder.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TempReading.py">
