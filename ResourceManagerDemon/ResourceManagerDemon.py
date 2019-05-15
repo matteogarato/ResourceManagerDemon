@@ -4,7 +4,8 @@ import ssl
 import configparser
 #import Screen
 import Message as msg
-import SSLMessage as command
+from SSLMessage import SSLMessage as command
+import SSLMessage as SSLMessageStatic
 import json
 
 
@@ -28,13 +29,21 @@ def readMessage(bindsocket):
 def clientMessageDispatcher(connstream):
     try:
         print('clientMessageDispatcher')
-        data = connstream.read()    
+        data = connstream.read() 
+        data = data.decode('utf-8')
+        data = json.loads(data)
         print('data: {}'.format(data))
-        sslMessage = json.loads(data, object_hook = command.as_sslMessage)
-    except:
+        recived= json.loads(data, object_hook = as_sslMessage)
+        sslMessage = command(recived[0],recived[1])
+        commandRecived = sslMessage.command
+    except Exception as e:
+        print(e)
         main()
 
-
+def as_sslMessage(dct):
+    if '__SSLMessage__' in dct:
+        return command(dct['command'], dct['parameters'])
+    return dct
 
 
 def readConfig():
