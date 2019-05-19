@@ -1,9 +1,9 @@
-#from SSLMessageEncoder import  SSLMessageEncoder as MyEncoder
+#from SSLMessageEncoder import SSLMessageEncoder as MyEncoder
 import json
 class SSLMessage(object):
     """description of class"""
     command = ""
-    parameters = []
+    parameters = dict()
 
     def __init__(self,command,parameters):
         self.command = command

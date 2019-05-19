@@ -32,10 +32,10 @@ def clientMessageDispatcher(connstream):
         data = connstream.read() 
         data = data.decode('utf-8')
         data = json.loads(data)
-        print('data: {}'.format(data))
-        recived= json.loads(data, object_hook = as_sslMessage)
+        recived = json.loads(data, object_hook = as_sslMessage)
         sslMessage = command(recived[0],recived[1])
         commandRecived = sslMessage.command
+        result = globals()[sslMessage.command](sslMessage.parameters)
     except Exception as e:
         print(e)
         main()
@@ -52,8 +52,9 @@ def readConfig():
     configParser.read(configFilePath)
 
 
-def displayMessage(line1,line2):
-    MessageQueue.append(msg(line1,line2))
+def displayMessage(parametersdict):
+    msgtoprint = msg.Message(parametersdict['line1'],parametersdict['line2'])
+    MessageQueue.append(msgtoprint)
 
 
 def messageQueueRemover():

@@ -15,8 +15,10 @@ def main():
                                    cert_reqs=ssl.CERT_REQUIRED)
         
         ssl_sock.connect(('localhost', 10023))
-        params = ['sei','tu','fantasticoguerriero']
-        cmd = sslCommand.SSLMessage('KEN',params)
+        params = dict()
+        params['line1'] = 'sei tu'
+        params['line2'] ='fantasticoguerriero'
+        cmd = sslCommand.SSLMessage('displayMessage',params)
         converted = serialize(cmd)
         ssl_sock.write(converted.encode('utf-8'))
 
