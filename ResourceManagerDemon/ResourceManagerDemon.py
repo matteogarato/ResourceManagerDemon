@@ -9,8 +9,6 @@ import SSLMessage as SSLMessageStatic
 import json
 
 
-
-
 MessageQueue = []
 
 def readMessage(bindsocket):
