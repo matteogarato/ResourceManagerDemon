@@ -3,6 +3,7 @@ import ssl
 #import daemon
 import configparser
 #import Screen
+import TempReading
 import Message as msg
 from SSLMessage import SSLMessage as command
 import SSLMessage as SSLMessageStatic
@@ -19,11 +20,10 @@ def readMessage(bindsocket):
                              certfile="server.crt",
                              keyfile="server.key")
     print('connstream')
-    #try:
-    clientMessageDispatcher(connstream)
-    #finally:
-        #connstream.shutdown(socket.SHUT_RDWR)
-        #connstream.close()
+    try:
+        clientMessageDispatcher(connstream)
+    finally:       
+        connstream.close()
 def clientMessageDispatcher(connstream):
     try:
         print('clientMessageDispatcher')
@@ -34,6 +34,7 @@ def clientMessageDispatcher(connstream):
         sslMessage = command(recived[0],recived[1])
         commandRecived = sslMessage.command
         result = globals()[sslMessage.command](sslMessage.parameters)
+        connstream.write(result)
     except Exception as e:
         print(e)
         main()
@@ -53,6 +54,11 @@ def readConfig():
 def displayMessage(parametersdict):
     msgtoprint = msg.Message(parametersdict['line1'],parametersdict['line2'])
     MessageQueue.append(msgtoprint)
+
+def readTemperature():
+    temp=TempReading.getTemperature()
+    hum=TempReading.getHumidity()
+    return "T:{};H:{}".format(temp,hum)
 
 
 def messageQueueRemover():

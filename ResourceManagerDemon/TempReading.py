@@ -25,6 +25,7 @@ def temperatureHumidityReading():
         reading = False
 
 def getTemperature():
+    temperatureHumidityReading()
     if len(temp) > 0:
         sumTemp = 0
         for i in range(0,len(temp),1):
@@ -34,6 +35,7 @@ def getTemperature():
         return 0
 
 def getHumidity():
+    temperatureHumidityReading()
     if len(humi) > 0:
         sumHumi = 0
         for i in range(0,len(humi),1):

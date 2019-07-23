@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>47131286-1f32-447f-acea-e4bd7f59138e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>client.py</StartupFile>
+    <StartupFile>ResourceManagerDemon.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
