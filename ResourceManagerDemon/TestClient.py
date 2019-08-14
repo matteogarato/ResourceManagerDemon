@@ -1,4 +1,4 @@
-import client as cli
+import client
 
 if __name__ == '__main__':
-    cli.Client.sendMessage("KEN","sender")
+    client.Client.sendMessage('KEN','sender')
