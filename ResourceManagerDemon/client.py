@@ -5,7 +5,7 @@ class Client(object):
     from SSLMessageEncoder import  SSLMessageEncoder as MyEncoder
     import json
     
-    def sendMessage(line1,line2):
+    def sendMessage(self,line1,line2):
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             ssl_sock = ssl.wrap_socket(s,
                                        ca_certs="server.crt",
@@ -20,7 +20,7 @@ class Client(object):
             ssl_sock.write(converted.encode('utf-8'))
             ssl_sock.close()
     
-    def readTemp():
+    def readTemp(self):
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             ssl_sock = ssl.wrap_socket(s,
                                        ca_certs="server.crt",

@@ -12,7 +12,7 @@ temp = []
 humi = []
 reading = False
 
-def temperatureHumidityReading():
+def temperatureHumidityReading(self):
      if not reading:
         reading = True
         temp = []
@@ -24,7 +24,7 @@ def temperatureHumidityReading():
                 humi.append(umi)
         reading = False
 
-def getTemperature():
+def getTemperature(self):
     temperatureHumidityReading()
     if len(temp) > 0:
         sumTemp = 0
@@ -34,7 +34,7 @@ def getTemperature():
     else:
         return 0
 
-def getHumidity():
+def getHumidity(self):
     temperatureHumidityReading()
     if len(humi) > 0:
         sumHumi = 0
