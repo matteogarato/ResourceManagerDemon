@@ -1,9 +1,10 @@
+import socket
+import json
+import ssl
+import SSLMessage as sslCommand
+from SSLMessageEncoder import  SSLMessageEncoder as MyEncoder
+
 class Client(object):
-    import socket
-    import ssl
-    import SSLMessage as sslCommand
-    from SSLMessageEncoder import  SSLMessageEncoder as MyEncoder
-    import json
     
     def sendMessage(self,line1,line2):
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -11,12 +12,12 @@ class Client(object):
                                        ca_certs="server.crt",
                                        cert_reqs=ssl.CERT_REQUIRED)
             
-            ssl_sock.connect('192.168.71.142', 10023)
+            ssl_sock.connect(('192.168.3.30', 10023))
             params = dict()
             params['line1'] = line1
             params['line2'] =line2
             cmd = sslCommand.SSLMessage('displayMessage',params)
-            converted = serialize(cmd)
+            converted = self.serialize(cmd)
             ssl_sock.write(converted.encode('utf-8'))
             ssl_sock.close()
     
@@ -26,15 +27,15 @@ class Client(object):
                                        ca_certs="server.crt",
                                        cert_reqs=ssl.CERT_REQUIRED)
             
-            ssl_sock.connect('192.168.71.142', 10023)
+            ssl_sock.connect(('192.168.3.30', 10023))
             params = dict()
             cmd = sslCommand.SSLMessage('displayMessage',params)
-            converted = serialize(cmd)
+            converted = self.serialize(cmd)
             ssl_sock.write(converted.encode('utf-8'))
             data = ssl_sock.read()
             ssl_sock.close()
     
-    def serialize(self):    
-        serialized = json.dumps(MyEncoder().encode(self),cls=MyEncoder)
+    def serialize(self,toSerialize):    
+        serialized = json.dumps(MyEncoder().encode(toSerialize),cls=MyEncoder)
         return serialized 
     
