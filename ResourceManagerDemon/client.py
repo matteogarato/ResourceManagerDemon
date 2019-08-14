@@ -1,4 +1,4 @@
-class Screen(object):
+class Client(object):
     import socket
     import ssl
     import SSLMessage as sslCommand
@@ -11,7 +11,7 @@ class Screen(object):
                                        ca_certs="server.crt",
                                        cert_reqs=ssl.CERT_REQUIRED)
             
-            ssl_sock.connect(('localhost', 10023))
+            ssl_sock.connect(('192.168.71.142', 10023))
             params = dict()
             params['line1'] = line1
             params['line2'] =line2
@@ -26,7 +26,7 @@ class Screen(object):
                                        ca_certs="server.crt",
                                        cert_reqs=ssl.CERT_REQUIRED)
             
-            ssl_sock.connect(('localhost', 10023))
+            ssl_sock.connect(('192.168.71.142', 10023))
             params = dict()
             cmd = sslCommand.SSLMessage('displayMessage',params)
             converted = serialize(cmd)
