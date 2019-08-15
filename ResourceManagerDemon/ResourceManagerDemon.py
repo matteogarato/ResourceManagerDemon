@@ -76,6 +76,6 @@ def main():
         messageQueueRemover()
 
 #run the daemon calling main
-with daemon.DaemonContext():
+#with daemon.DaemonContext():
+if __name__ == '__main__':
     main()
-#if __name__ == '__main__':
