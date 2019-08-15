@@ -64,7 +64,7 @@ def readTemperature():
 def messageQueueRemover():
     if len(MessageQueue) > 0 and not(Screen.display):
         messageTodisplay = msg(MessageQueue[0])
-        #Screen.textmessagerecieved(messageTodisplay.line1,messageTodisplay.line2)
+        Screen.textmessagerecieved(messageTodisplay.line1,messageTodisplay.line2)
         MessageQueue.pop(0)
 
 def main():
