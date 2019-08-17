@@ -8,35 +8,35 @@ class TempReading(object):
    temp = []
    humi = []
    reading = False
-   
+  
    def temperatureHumidityReading(self):
-        if not reading:
-           reading = True
-           temp = []
-           humi = []
+        if not self.reading:
+           self.reading = True
+           self.temp = []
+           self.humi = []
            for i in range(0,3,1):
                umi, tem = Adafruit_DHT.read_retry(DHT11, DHT11_PIN, retries=2, delay_seconds=1) 
                if umi is not None and tem is not None:
-                   temp.append(tem)
-                   humi.append(umi)
+                   self.temp.append(tem)
+                   self.humi.append(umi)
            reading = False
    
    def getTemperature(self):
        self.temperatureHumidityReading()
-       if len(temp) > 0:
+       if len(self.temp) > 0:
            sumTemp = 0
-           for i in range(0,len(temp),1):
-               sumTemp+=temp[i]
-           return sumTemp / len(temp)
+           for i in range(0,len(self.temp),1):
+               sumTemp+=self.temp[i]
+           return sumTemp / len(self.temp)
        else:
            return 0
    
    def getHumidity(self):
        self.temperatureHumidityReading()
-       if len(humi) > 0:
+       if len(self.humi) > 0:
            sumHumi = 0
-           for i in range(0,len(humi),1):
-               sumHumi+=humi[i]
-           return sumHumi / len(humi)
+           for i in range(0,len(self.humi),1):
+               sumHumi+=self.humi[i]
+           return sumHumi / len(self.humi)
        else:
            return 0
