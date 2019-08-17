@@ -22,7 +22,7 @@ class TempReading(object):
            reading = False
    
    def getTemperature(self):
-       temperatureHumidityReading()
+       self.temperatureHumidityReading()
        if len(temp) > 0:
            sumTemp = 0
            for i in range(0,len(temp),1):
@@ -32,7 +32,7 @@ class TempReading(object):
            return 0
    
    def getHumidity(self):
-       temperatureHumidityReading()
+       self.temperatureHumidityReading()
        if len(humi) > 0:
            sumHumi = 0
            for i in range(0,len(humi),1):
