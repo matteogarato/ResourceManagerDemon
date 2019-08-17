@@ -55,7 +55,7 @@ def displayMessage(parametersdict):
     msgtoprint = msg.Message(parametersdict['line1'],parametersdict['line2'])
     MessageQueue.append(msgtoprint)
 
-def readTemperature():
+def readTemperature(self):
     temp=TempReading.getTemperature()
     hum=TempReading.getHumidity()
     return "T:{};H:{}".format(temp,hum)

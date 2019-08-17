@@ -12,10 +12,10 @@ class Client(object):
                                        ca_certs="server.crt",
                                        cert_reqs=ssl.CERT_REQUIRED)
             
-            ssl_sock.connect(('192.168.3.30', 10023))
+            ssl_sock.connect(('192.168.3.105', 10023))
             params = dict()
             params['line1'] = line1
-            params['line2'] =line2
+            params['line2'] = line2
             cmd = sslCommand.SSLMessage('displayMessage',params)
             converted = self.serialize(cmd)
             ssl_sock.write(converted.encode('utf-8'))
@@ -27,9 +27,9 @@ class Client(object):
                                        ca_certs="server.crt",
                                        cert_reqs=ssl.CERT_REQUIRED)
             
-            ssl_sock.connect(('192.168.3.30', 10023))
+            ssl_sock.connect(('192.168.3.105', 10023))
             params = dict()
-            cmd = sslCommand.SSLMessage('displayMessage',params)
+            cmd = sslCommand.SSLMessage('readTemperature',params)
             converted = self.serialize(cmd)
             ssl_sock.write(converted.encode('utf-8'))
             data = ssl_sock.read()
