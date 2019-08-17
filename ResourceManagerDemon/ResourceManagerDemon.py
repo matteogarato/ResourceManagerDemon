@@ -11,7 +11,7 @@ import json
 
 
 MessageQueue = []
-TempReadingInstance=TempReading.TempReading()
+TempReadingInstance = TempReading.TempReading()
 
 def readMessage(bindsocket):
     newsocket, fromaddr = bindsocket.accept()
@@ -54,13 +54,15 @@ def readConfig():
     configParser.read(configFilePath)
 
 
-def displayMessage(parametersdict):
+def displayMessage(self,parametersdict):
     msgtoprint = msg.Message(parametersdict['line1'],parametersdict['line2'])
     MessageQueue.append(msgtoprint)
+    print('exit from displayMessage')
+    return ''
 
 def readTemperature(self):
-    temp=TempReadingInstance.getTemperature()
-    hum=TempReadingInstance.getHumidity()
+    temp = TempReadingInstance.getTemperature()
+    hum = TempReadingInstance.getHumidity()
     return "T:{};H:{}".format(temp,hum)
 
 

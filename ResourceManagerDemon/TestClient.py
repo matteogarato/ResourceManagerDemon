@@ -1,6 +1,5 @@
 import client
 
 if __name__ == '__main__':
-    clientInstance= client.Client()
-    read=clientInstance.readTemp()
-    print(read)
+    clientInstance = client.Client()
+    clientInstance.sendMessage('linea1','linea2')
