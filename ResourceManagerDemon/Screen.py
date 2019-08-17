@@ -1,4 +1,4 @@
-import Adafruit_CharLCD as LCD
+import Adafruit_CharLCD as LCD #this thing must go, i need to use a new library, not a discontinued one
 import time as timeExec
 
 class Screen(object):

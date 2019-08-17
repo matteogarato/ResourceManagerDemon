@@ -28,7 +28,9 @@ def clientMessageDispatcher(connstream):
     try:
         print('clientMessageDispatcher')
         data = connstream.read() 
+        print('data:{}'.format(data))
         data = data.decode('utf-8')
+        print('decoded:{}'.format(data))
         data = json.loads(data)
         recived = json.loads(data, object_hook = as_sslMessage)
         sslMessage = command(recived[0],recived[1])
