@@ -12,6 +12,7 @@ import json
 
 MessageQueue = []
 TempReadingInstance = TempReading.TempReading()
+ScreenInstance=Screen.Screen()
 
 def readMessage(bindsocket):
     newsocket, fromaddr = bindsocket.accept()
@@ -58,7 +59,7 @@ def displayMessage(parametersdict):
     msgtoprint = msg.Message(parametersdict['line1'],parametersdict['line2'])
     MessageQueue.append(msgtoprint)
     print('exit from displayMessage')
-    return ''
+    return ""
 
 def readTemperature(self):
     temp = TempReadingInstance.getTemperature()
@@ -67,9 +68,9 @@ def readTemperature(self):
 
 
 def messageQueueRemover():
-    if len(MessageQueue) > 0 and not(Screen.display):
+    if len(MessageQueue) > 0 and not(self.ScreenInstance.display):
         messageTodisplay = msg(MessageQueue[0])
-        Screen.textmessagerecieved(messageTodisplay.line1,messageTodisplay.line2)
+        self.ScreenInstance.textmessagerecieved(messageTodisplay.line1,messageTodisplay.line2)
         MessageQueue.pop(0)
 
 def main():
