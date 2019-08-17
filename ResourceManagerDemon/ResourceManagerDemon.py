@@ -54,7 +54,7 @@ def readConfig():
     configParser.read(configFilePath)
 
 
-def displayMessage(self,parametersdict):
+def displayMessage(parametersdict):
     msgtoprint = msg.Message(parametersdict['line1'],parametersdict['line2'])
     MessageQueue.append(msgtoprint)
     print('exit from displayMessage')
