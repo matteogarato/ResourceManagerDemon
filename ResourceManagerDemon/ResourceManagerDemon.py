@@ -12,7 +12,7 @@ import json
 
 MessageQueue = []
 TempReadingInstance = TempReading.TempReading()
-ScreenInstance=Screen.Screen()
+ScreenInstance = Screen.Screen()
 
 def readMessage(bindsocket):
     newsocket, fromaddr = bindsocket.accept()
@@ -56,15 +56,21 @@ def readConfig():
 
 
 def displayMessage(parametersdict):
-    msgtoprint = msg.Message(parametersdict['line1'],parametersdict['line2'])
-    MessageQueue.append(msgtoprint)
-    print('exit from displayMessage')
-    return ""
+    try:
+        msgtoprint = msg.Message(parametersdict['line1'],parametersdict['line2'])
+        MessageQueue.append(msgtoprint)
+        print('exit from displayMessage')
+        return "OK"
+    except Exception as e:
+        return e.args
 
 def readTemperature(self):
-    temp = TempReadingInstance.getTemperature()
-    hum = TempReadingInstance.getHumidity()
-    return "T:{};H:{}".format(temp,hum)
+    try:
+        temp = TempReadingInstance.getTemperature()
+        hum = TempReadingInstance.getHumidity()
+        return "T:{};H:{}".format(temp,hum)
+    except Exception as e:
+        return e.args
 
 
 def messageQueueRemover():
