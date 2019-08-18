@@ -60,7 +60,7 @@ def displayMessage(parametersdict):
         msgtoprint = msg.Message(parametersdict['line1'],parametersdict['line2'])
         MessageQueue.append(msgtoprint)
         print('exit from displayMessage')
-        return "OK"
+        return b'OK'
     except Exception as e:
         return e.args
 
