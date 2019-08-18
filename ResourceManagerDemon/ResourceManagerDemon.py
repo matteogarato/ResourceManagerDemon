@@ -64,7 +64,7 @@ def displayMessage(parametersdict):
     except Exception as e:
         return e.args
 
-def readTemperature(self):
+def readTemperature():
     try:
         temp = TempReadingInstance.getTemperature()
         hum = TempReadingInstance.getHumidity()
@@ -74,9 +74,9 @@ def readTemperature(self):
 
 
 def messageQueueRemover():
-    if len(MessageQueue) > 0 and not(self.ScreenInstance.display):
+    if len(MessageQueue) > 0 and not(ScreenInstance.display):
         messageTodisplay = msg(MessageQueue[0])
-        self.ScreenInstance.textmessagerecieved(messageTodisplay.line1,messageTodisplay.line2)
+        ScreenInstance.textmessagerecieved(messageTodisplay.line1,messageTodisplay.line2)
         MessageQueue.pop(0)
 
 def main():
