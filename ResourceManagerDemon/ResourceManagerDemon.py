@@ -68,6 +68,8 @@ def readTemperature(parametersdict):
     try:
         temp = TempReadingInstance.getTemperature()
         hum = TempReadingInstance.getHumidity()
+        print('exit from readTemperature')
+        print('T:{};H:{}'.format(temp,hum))
         return b'T:{};H:{}'.format(temp,hum)
     except Exception as e:
         return e.args
