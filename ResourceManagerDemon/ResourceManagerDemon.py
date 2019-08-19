@@ -64,7 +64,7 @@ def displayMessage(parametersdict):
     except Exception as e:
         return e.args
 
-def readTemperature():
+def readTemperature(parametersdict):
     try:
         temp = TempReadingInstance.getTemperature()
         hum = TempReadingInstance.getHumidity()
