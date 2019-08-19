@@ -57,6 +57,7 @@ def readConfig():
 
 def displayMessage(parametersdict):
     try:
+        print('enter displayMessage')
         msgtoprint = msg.Message(parametersdict['line1'],parametersdict['line2'])
         MessageQueue.append(msgtoprint)
         print('exit from displayMessage')
