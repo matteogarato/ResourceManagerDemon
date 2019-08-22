@@ -16,6 +16,7 @@ class TempReading(object):
            self.humi = []
            print('temperatureHumidityReading')
            umi, tem = Adafruit_DHT.read_retry(DHT11, DHT11_PIN) 
+           print('after reading')
            if umi is not None and tem is not None:
                 print('umi:{}'.format(umi))
                 print('tem:{}'.format(tem))
