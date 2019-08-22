@@ -15,13 +15,12 @@ class TempReading(object):
            self.temp = []
            self.humi = []
            print('temperatureHumidityReading')
-           for i in range(0,3,1):
-               umi, tem = Adafruit_DHT.read_retry(DHT11, DHT11_PIN) 
-               if umi is not None and tem is not None:
-                   print('umi:{}'.format(umi))
-                   print('tem:{}'.format(tem))
-                   self.temp.append(tem)
-                   self.humi.append(umi)
+           umi, tem = Adafruit_DHT.read_retry(DHT11, DHT11_PIN) 
+           if umi is not None and tem is not None:
+                print('umi:{}'.format(umi))
+                print('tem:{}'.format(tem))
+                self.temp.append(tem)
+                self.humi.append(umi)
            reading = False
    
    def getTemperature(self):
