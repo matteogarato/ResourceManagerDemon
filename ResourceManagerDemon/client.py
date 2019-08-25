@@ -5,6 +5,11 @@ import SSLMessage as sslCommand
 from SSLMessageEncoder import  SSLMessageEncoder as MyEncoder
 
 class Client(object):
+
+    ip=''
+
+    def __init__(self,ipadress):
+        self.ip = ipadress        
     
     def sendMessage(self,line1,line2):
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -12,7 +17,7 @@ class Client(object):
                                        ca_certs="server.crt",
                                        cert_reqs=ssl.CERT_REQUIRED)
             
-            ssl_sock.connect(('192.168.3.105', 10023))
+            ssl_sock.connect((self.ip, 10023))
             params = dict()
             params['line1'] = line1
             params['line2'] = line2
@@ -27,7 +32,7 @@ class Client(object):
                                        ca_certs="server.crt",
                                        cert_reqs=ssl.CERT_REQUIRED)
             
-            ssl_sock.connect(('192.168.3.105', 10023))
+            ssl_sock.connect((self.ip, 10023))
             params = dict()
             cmd = sslCommand.SSLMessage('readTemperature',params)
             converted = self.serialize(cmd)
