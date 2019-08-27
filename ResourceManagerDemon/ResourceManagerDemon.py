@@ -83,6 +83,8 @@ def messageQueueRemover():
         print('line1:{} line2:{}'.format(MessageQueue[0].line1,MessageQueue[0].line2))
         ScreenInstance.textmessagerecieved(MessageQueue[0].line1,MessageQueue[0].line2)
         MessageQueue.pop(0)
+    elif len(MessageQueue) == 0 and not(ScreenInstance.display):
+        ScreenInstance.sceenSaver()
 
 def main():
     bindsocket = socket.socket()

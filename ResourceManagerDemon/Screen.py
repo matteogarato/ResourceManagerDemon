@@ -1,5 +1,10 @@
 import Adafruit_CharLCD as LCD #this thing must go, i need to use a new library, not a discontinued one
 import time as timeExec
+import commands
+import os
+import psutil
+import datetime
+import time
 
 class Screen(object):
    # Raspberry Pi pin setup
@@ -34,3 +39,25 @@ class Screen(object):
            self.lcd.message("{}\n{}".format((line1).center(16),(line2).center(16)))
        timeExec.sleep(20)
        self.display = False
+
+    
+   def sceenSaver(self):
+       self.lcd.clear()
+       msgIp = commands.getoutput('hostname -I')
+       msgIp = msgIp.split(' ',1)[0]
+       msgIp = msgIp.center(16)
+       self.lcd.message(msgIp)
+       self.lcd.message('\n')
+       temp = commands.getoutput('/opt/vc/bin/vcgencmd measure_temp')
+       temp = temp.replace("temp","T")
+       temp = temp.replace("C","")
+       temp = temp.split('.', 1)[0]
+       cpusage = psutil.cpu_percent()
+       cpu = " C={}".format(cpusage)
+       cpu = cpu.split('.', 1)[0]
+       ram = " FR={}".format(commands.getoutput("free | grep Mem | awk '{print $4/$2 * 100.0}'"))
+       ram = ram.split('.', 1)[0]
+       row2 = temp + cpu + ram
+       row2 = row2.center(16)
+       self.lcd.message(row2)
+
