@@ -113,12 +113,12 @@ def main():
     bindsocket.bind(('', 10023))
     bindsocket.listen(5)
     while True:
-        print("readMessage")
-        readMessage(bindsocket)
         print("messageQueueRemover")
         messageQueueRemover()
         print("readRSS")
         readRSS()
+        print("readMessage")
+        readMessage(bindsocket)
 
 #run the daemon calling main
 #with daemon.DaemonContext():
