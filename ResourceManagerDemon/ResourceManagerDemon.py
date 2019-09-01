@@ -101,9 +101,10 @@ def readRSS():
     for post in feed.entries:
       date = "(%d/%02d/%02d)" % (post.published_parsed.tm_year, post.published_parsed.tm_mon, post.published_parsed.tm_mday)
       msgtoprint = msg.Message(date,post.title)
-      if msgtoprint not in RssMessage:
-          print("added: {}".format(post.title))
-          RssMessage.append(msgtoprint)
+      for val in RssMessage:
+        if msgtoprint.line2!=val.line2:
+            print("added: {}".format(post.title))
+            RssMessage.append(msgtoprint)
 
 
 def main():
