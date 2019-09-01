@@ -15,8 +15,6 @@ MessageQueue = []
 RssMessage = []
 TempReadingInstance = TempReading.TempReading()
 ScreenInstance = Screen.Screen()
-url = "https://news.ycombinator.com/rss"
-feed = feedparser.parse(url)
 
 def readMessage(bindsocket):
     newsocket, fromaddr = bindsocket.accept()
@@ -88,17 +86,19 @@ def messageQueueRemover():
         ScreenInstance.textmessagerecieved(MessageQueue[0].line1,MessageQueue[0].line2)
         MessageQueue.pop(0)
     elif len(MessageQueue) == 0 and not(ScreenInstance.display) and len(RssMessage) > 0:
-        toShow=next(m for m in RssMessage if m.displayed==False)
+        toShow = next(m for m in RssMessage if m.displayed == False)
         if(toShow is not None):
             ScreenInstance.textmessagerecieved(toShow.line1,toShow.line2)
-            toShow.displayed=True
+            toShow.displayed = True
 
 def readRSS():
-    for post in feed.entries:        
+    feed = feedparser.parse("https://news.ycombinator.com/rss")
+    for post in feed.entries:
+      print(post.title)
       date = "(%d/%02d/%02d)" % (post.published_parsed.tm_year, post.published_parsed.tm_mon, post.published_parsed.tm_mday)
       msgtoprint = msg.Message(date,post.title)
       if msgtoprint not in RssMessage:
-          print(post.title)
+          print("added: {}".format(post.title))
           RssMessage.append(msgtoprint)
 
 
