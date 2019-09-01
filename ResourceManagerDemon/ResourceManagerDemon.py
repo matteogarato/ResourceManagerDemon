@@ -90,7 +90,6 @@ def messageQueueRemover():
          for val in RssMessage:
              if val.displayed == True:
                  toShow+=1
-         toShow = indexRssToShow(RssMessage)
          print("displaing: {}".format(RssMessage[toShow].line2))
          ScreenInstance.textmessagerecieved(RssMessage[toShow].line1,RssMessage[toShow].line2)
          RssMessage[toShow].displayed = True
