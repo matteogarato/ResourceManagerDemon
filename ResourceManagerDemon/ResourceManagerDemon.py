@@ -102,10 +102,14 @@ def readRSS():
       date = "(%d/%02d/%02d)" % (post.published_parsed.tm_year, post.published_parsed.tm_mon, post.published_parsed.tm_mday)
       msgtoprint = msg.Message(date,post.title)
       if len(RssMessage) > 0:
+        found = False
         for val in RssMessage:
-          if msgtoprint.line2 != val.line2:
-              print("added: {}".format(post.title))
-              RssMessage.append(msgtoprint)
+          if msgtoprint.line2 == val.line2:
+              found = True
+
+        if found == False:
+         print("added: {}".format(post.title))
+         RssMessage.append(msgtoprint)
       else:
         RssMessage.append(msgtoprint)
 
