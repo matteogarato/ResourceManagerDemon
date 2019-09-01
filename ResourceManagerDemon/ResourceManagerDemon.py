@@ -92,6 +92,7 @@ def messageQueueRemover():
             toShow.displayed = True
 
 def readRSS():
+    print('readRSS')
     feed = feedparser.parse("https://news.ycombinator.com/rss")
     for post in feed.entries:
       print(post.title)
@@ -108,8 +109,8 @@ def main():
     bindsocket.listen(5)
     while True:
         readMessage(bindsocket)
-        messageQueueRemover()
         readRSS()
+        messageQueueRemover()
 
 #run the daemon calling main
 #with daemon.DaemonContext():
