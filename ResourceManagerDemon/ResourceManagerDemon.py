@@ -88,6 +88,7 @@ def messageQueueRemover():
     elif len(MessageQueue) == 0 and not(ScreenInstance.display) and len(RssMessage) > 0:
         toShow = next(m for m in RssMessage if m.displayed == False)
         if(toShow is not None):
+            print("displaing: {}".format(toShow.line2))
             ScreenInstance.textmessagerecieved(toShow.line1,toShow.line2)
             toShow.displayed = True
 
