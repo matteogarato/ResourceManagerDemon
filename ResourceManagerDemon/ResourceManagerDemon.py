@@ -12,7 +12,7 @@ import feedparser
 
 
 MessageQueue = []
-RssMessage = List[msg]
+RssMessage = []
 TempReadingInstance = TempReading.TempReading()
 ScreenInstance = Screen.Screen()
 url = "https://news.ycombinator.com/rss"
@@ -88,7 +88,10 @@ def messageQueueRemover():
         ScreenInstance.textmessagerecieved(MessageQueue[0].line1,MessageQueue[0].line2)
         MessageQueue.pop(0)
     elif len(MessageQueue) == 0 and not(ScreenInstance.display) and len(RssMessage) > 0:
-        ScreenInstance.textmessagerecieved(RssMessage[0].line1,RssMessage[0].line2)
+        toShow=next(m for m in RssMessage if m.displayed==False)
+        if(toShow is not None):
+            ScreenInstance.textmessagerecieved(toShow.line1,toShow.line2)
+            toShow.displayed=True
 
 def readRSS():
     for post in feed.entries:        
