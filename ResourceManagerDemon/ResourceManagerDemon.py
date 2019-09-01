@@ -104,13 +104,14 @@ def readRSS():
 
 
 def main():
+    readRSS()
     bindsocket = socket.socket()
     bindsocket.bind(('', 10023))
     bindsocket.listen(5)
     while True:
         readMessage(bindsocket)
-        readRSS()
         messageQueueRemover()
+        readRSS()
 
 #run the daemon calling main
 #with daemon.DaemonContext():
