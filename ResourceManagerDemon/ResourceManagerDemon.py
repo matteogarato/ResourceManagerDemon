@@ -8,11 +8,15 @@ import Message as msg
 from SSLMessage import SSLMessage as command
 import SSLMessage as SSLMessageStatic
 import json
+import feedparser
 
 
 MessageQueue = []
+RssMessage = List[msg]
 TempReadingInstance = TempReading.TempReading()
 ScreenInstance = Screen.Screen()
+url = "https://news.ycombinator.com/rss"
+feed = feedparser.parse(url)
 
 def readMessage(bindsocket):
     newsocket, fromaddr = bindsocket.accept()
@@ -83,8 +87,16 @@ def messageQueueRemover():
         print('line1:{} line2:{}'.format(MessageQueue[0].line1,MessageQueue[0].line2))
         ScreenInstance.textmessagerecieved(MessageQueue[0].line1,MessageQueue[0].line2)
         MessageQueue.pop(0)
-    elif len(MessageQueue) == 0 and not(ScreenInstance.display):
-        ScreenInstance.sceenSaver()
+    elif len(MessageQueue) == 0 and not(ScreenInstance.display) and len(RssMessage) > 0:
+        ScreenInstance.textmessagerecieved(RssMessage[0].line1,RssMessage[0].line2)
+
+def readRSS():
+    for post in feed.entries:        
+      date = "(%d/%02d/%02d)" % (post.published_parsed.tm_year, post.published_parsed.tm_mon, post.published_parsed.tm_mday)
+      msgtoprint = msg.Message(date,post.title)
+      if msgtoprint not in RssMessage:
+         RssMessage.append(msgtoprint)
+
 
 def main():
     bindsocket = socket.socket()
@@ -93,6 +105,7 @@ def main():
     while True:
         readMessage(bindsocket)
         messageQueueRemover()
+        readRSS()
 
 #run the daemon calling main
 #with daemon.DaemonContext():

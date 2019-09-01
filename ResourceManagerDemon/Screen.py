@@ -39,25 +39,3 @@ class Screen(object):
            self.lcd.message("{}\n{}".format((line1).center(16),(line2).center(16)))
        timeExec.sleep(20)
        self.display = False
-
-    
-   def sceenSaver(self):
-       self.lcd.clear()
-       msgIp = subprocess.call(['hostname', '-I'])
-       msgIp = msgIp.split(' ',1)[0]
-       msgIp = msgIp.center(16)
-       self.lcd.message(msgIp)
-       self.lcd.message('\n')
-       temp = subprocess.call('/opt/vc/bin/vcgencmd measure_temp')
-       temp = temp.replace("temp","T")
-       temp = temp.replace("C","")
-       temp = temp.split('.', 1)[0]
-       cpusage = psutil.cpu_percent()
-       cpu = " C={}".format(cpusage)
-       cpu = cpu.split('.', 1)[0]
-       #ram = " FR={}".format(commands.getoutput("free | grep Mem | awk '{print $4/$2 * 100.0}'"))
-       #ram = ram.split('.', 1)[0]
-       row2 = temp + cpu #+ ram
-       row2 = row2.center(16)
-       self.lcd.message(row2)
-
