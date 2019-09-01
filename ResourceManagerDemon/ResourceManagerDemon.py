@@ -86,11 +86,15 @@ def messageQueueRemover():
         ScreenInstance.textmessagerecieved(MessageQueue[0].line1,MessageQueue[0].line2)
         MessageQueue.pop(0)
     elif len(MessageQueue) == 0 and not(ScreenInstance.display) and len(RssMessage) > 0:
-        toShow = next(m for m in RssMessage if m.displayed == False)
-        if(toShow is not None):
-            print("displaing: {}".format(toShow.line2))
-            ScreenInstance.textmessagerecieved(toShow.line1,toShow.line2)
-            toShow.displayed = True
+         toShow = 0
+         for val in RssMessage:
+             if val.displayed == True:
+                 toShow+=1
+         toShow = indexRssToShow(RssMessage)
+         print("displaing: {}".format(RssMessage[toShow].line2))
+         ScreenInstance.textmessagerecieved(RssMessage[toShow].line1,RssMessage[toShow].line2)
+         RssMessage[toShow].displayed = True
+
 
 def readRSS():
     print('readRSS')
