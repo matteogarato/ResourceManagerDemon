@@ -100,7 +100,6 @@ def readRSS():
     print('readRSS')
     feed = feedparser.parse("https://news.ycombinator.com/rss")
     for post in feed.entries:
-      print(post.title)
       date = "(%d/%02d/%02d)" % (post.published_parsed.tm_year, post.published_parsed.tm_mon, post.published_parsed.tm_mday)
       msgtoprint = msg.Message(date,post.title)
       if msgtoprint not in RssMessage:
@@ -114,8 +113,11 @@ def main():
     bindsocket.bind(('', 10023))
     bindsocket.listen(5)
     while True:
+        print("readMessage")
         readMessage(bindsocket)
+        print("messageQueueRemover")
         messageQueueRemover()
+        print("readRSS")
         readRSS()
 
 #run the daemon calling main
