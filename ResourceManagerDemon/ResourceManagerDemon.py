@@ -121,7 +121,7 @@ def main():
     bindsocket.listen(5)
     readRSSThread = threading.Thread(target=readRSS(), daemon=True)
     msgQueueThread = threading.Thread(target=messageQueueRemover(), daemon=True)        
-    socketReaderThread = threading.Thread(target=readMessage(),args=[bindsocket])
+    socketReaderThread = threading.Thread(target=readMessage(),args=[bindsocket], daemon=True)
     while True:
         socketReaderThread.start()
         readRSSThread.start()
