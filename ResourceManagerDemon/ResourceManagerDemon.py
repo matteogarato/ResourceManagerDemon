@@ -121,11 +121,11 @@ def main():
     bindsocket.listen(5)
     readRSSThread = threading.Thread(target=readRSS(), daemon=True)
     msgQueueThread = threading.Thread(target=messageQueueRemover(), daemon=True)        
-    socketReaderThread = threading.Thread(target=readMessage(),args=(bindsocket,))
+    socketReaderThread = threading.Thread(target=readMessage(),args=[bindsocket])
     while True:
+        socketReaderThread.start()
         readRSSThread.start()
         msgQueueThread.start()
-        socketReaderThread.start()
 
 #run the daemon calling main
 #with daemon.DaemonContext():
