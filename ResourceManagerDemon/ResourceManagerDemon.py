@@ -18,6 +18,7 @@ TempReadingInstance = TempReading.TempReading()
 ScreenInstance = Screen.Screen()
 
 def readMessage(bindsocket):
+    print('readMessage')
     newsocket, fromaddr = bindsocket.accept()
     print('newsocket')
     connstream = ssl.wrap_socket(newsocket,
