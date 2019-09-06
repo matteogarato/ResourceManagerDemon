@@ -116,7 +116,6 @@ def readRSS():
              RssMessage.append(msgtoprint)
           else:
             RssMessage.append(msgtoprint)
-        time.sleep(300)
 
 
 def main():
