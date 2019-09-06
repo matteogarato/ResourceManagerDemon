@@ -116,8 +116,8 @@ def readRSS():
 
 
 def main():
-    readRSSThread = threading.Thread(Target=readRSS())
-    msgQueueThread = threading.Thread(Target=messageQueueRemover())
+    readRSSThread = threading.Thread(target=readRSS())
+    msgQueueThread = threading.Thread(target=messageQueueRemover())
     readRSSThread.start()
     msgQueueThread.start()
     bindsocket = socket.socket()
