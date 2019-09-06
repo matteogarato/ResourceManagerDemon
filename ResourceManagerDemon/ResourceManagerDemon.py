@@ -8,7 +8,7 @@ import Message as msg
 from SSLMessage import SSLMessage as command
 import SSLMessage as SSLMessageStatic
 import json
-import threading
+from multiprocessing import Process
 import time
 import feedparser
 
@@ -123,10 +123,10 @@ def main():
     bindsocket = socket.socket()
     bindsocket.bind(('', 10023))
     bindsocket.listen(5)
-    readRSSThread = threading.Thread(target=readRSS(), daemon=True)
-    msgQueueThread = threading.Thread(target=messageQueueRemover(), daemon=True)        
-    msgQueueThread.start()
+    readRSSThread = Process(target=readRSS())
+    msgQueueThread = Process(target=messageQueueRemover())        
     readRSSThread.start()
+    msgQueueThread.start()
     while True:
         readMessage(bindsocket)
 
