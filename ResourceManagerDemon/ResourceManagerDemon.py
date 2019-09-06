@@ -8,6 +8,7 @@ import Message as msg
 from SSLMessage import SSLMessage as command
 import SSLMessage as SSLMessageStatic
 import json
+import threading
 import feedparser
 
 
@@ -115,15 +116,14 @@ def readRSS():
 
 
 def main():
-    readRSS()
+    readRSSThread = threading.Thread(Target=readRSS())
+    msgQueueThread = threading.Thread(Target=messageQueueRemover())
+    readRSSThread.start()
+    msgQueueThread.start()
     bindsocket = socket.socket()
     bindsocket.bind(('', 10023))
     bindsocket.listen(5)
     while True:
-        print("messageQueueRemover")
-        messageQueueRemover()
-        print("readRSS")
-        readRSS()
         print("readMessage")
         readMessage(bindsocket)
 
