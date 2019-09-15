@@ -28,7 +28,13 @@
     <Compile Include="Message.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MessageConsumer.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ResourceManagerDemon.py" />
+    <Compile Include="RssReader.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Screen.py">
       <SubType>Code</SubType>
     </Compile>

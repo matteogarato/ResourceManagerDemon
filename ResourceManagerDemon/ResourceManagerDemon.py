@@ -1,22 +1,15 @@
 import socket
 import ssl
-import daemon
 import configparser
-import Screen
 import TempReading
-import Message as msg
 from SSLMessage import SSLMessage as command
 import SSLMessage as SSLMessageStatic
 import json
-import threading
 import time
-import feedparser
+import MessageConsumer
 
-
-MessageQueue = []
-RssMessage = []
 TempReadingInstance = TempReading.TempReading()
-ScreenInstance = Screen.Screen()
+MessageConsumerIstance = MessageConsumer.MessageConsumer()
 
 def readMessage(bindsocket):
     print('readMessage')
@@ -64,7 +57,7 @@ def displayMessage(parametersdict):
     try:
         print('enter displayMessage')
         msgtoprint = msg.Message(parametersdict['line1'],parametersdict['line2'])
-        MessageQueue.append(msgtoprint)
+        MessageConsumerIstance.AddRssMessage(date,post.title)
         print('exit from displayMessage')
         return b'OK'
     except Exception as e:
@@ -82,54 +75,15 @@ def readTemperature(parametersdict):
         return e.args
 
 
-def messageQueueRemover():
-    while True:
-        print('Display message')
-        if len(MessageQueue) > 0 and not(ScreenInstance.display):
-            print('line1:{} line2:{}'.format(MessageQueue[0].line1,MessageQueue[0].line2))
-            ScreenInstance.textmessagerecieved(MessageQueue[0].line1,MessageQueue[0].line2)
-            MessageQueue.pop(0)
-        elif len(MessageQueue) == 0 and not(ScreenInstance.display) and len(RssMessage) > 0:
-             toShow = 0
-             for val in RssMessage:
-                 if val.displayed == True:
-                     toShow+=1
-             print("displaing: {}".format(RssMessage[toShow].line2))
-             ScreenInstance.textmessagerecieved(RssMessage[toShow].line1,RssMessage[toShow].line2)
-             RssMessage[toShow].displayed = True
-
-
-def readRSS():
-    while True:
-        print('readRSS')
-        feed = feedparser.parse("https://news.ycombinator.com/rss")
-        for post in feed.entries:
-          date = "(%d/%02d/%02d)" % (post.published_parsed.tm_year, post.published_parsed.tm_mon, post.published_parsed.tm_mday)
-          msgtoprint = msg.Message(date,post.title)
-          if len(RssMessage) > 0:
-            found = False
-            for val in RssMessage:
-              if msgtoprint.line2 == val.line2:
-                  found = True
-            if found == False:
-             print("added: {}".format(post.title))
-             RssMessage.append(msgtoprint)
-          else:
-            RssMessage.append(msgtoprint)
-
-
 def main():
     bindsocket = socket.socket()
     bindsocket.bind(('', 10023))
     bindsocket.listen(5)
-    readRSSThread = threading.Thread(target=readRSS(), daemon=True)
-    msgQueueThread = threading.Thread(target=messageQueueRemover(), daemon=True)        
-    msgQueueThread.start()
+    readRSSThread = threading.Thread(target=readRSS(), daemon=True)   
     readRSSThread.start()
+    MessageConsumerIstance = MessageConsumer.MessageConsumer()
     while True:
         readMessage(bindsocket)
 
-#run the daemon calling main
-#with daemon.DaemonContext():
 if __name__ == '__main__':
     main()
