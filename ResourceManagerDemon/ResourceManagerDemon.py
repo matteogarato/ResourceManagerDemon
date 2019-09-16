@@ -7,9 +7,11 @@ import SSLMessage as SSLMessageStatic
 import json
 import time
 import MessageConsumer
+import RssReader
 
 TempReadingInstance = TempReading.TempReading()
 MessageConsumerIstance = MessageConsumer.MessageConsumer()
+RssReaderIstance = RssReader.RssReader() 
 
 def readMessage(bindsocket):
     print('readMessage')
@@ -82,6 +84,7 @@ def main():
     readRSSThread = threading.Thread(target=readRSS(), daemon=True)   
     readRSSThread.start()
     MessageConsumerIstance = MessageConsumer.MessageConsumer()
+    RssReaderIstance = RssReader.RssReader(MessageConsumerIstance)
     while True:
         readMessage(bindsocket)
 

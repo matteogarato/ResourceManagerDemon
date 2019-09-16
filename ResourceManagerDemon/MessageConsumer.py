@@ -16,34 +16,34 @@ class MessageConsumer(object):
         while true:
             messageQueueRemover()
 
-    def messageQueueRemover():
+    def messageQueueRemover(self):
         print('Display message')
-        if len(MessageQueue) > 0 and not(ScreenInstance.display):
-            print('line1:{} line2:{}'.format(MessageQueue[0].line1,MessageQueue[0].line2))
-            ScreenInstance.textmessagerecieved(MessageQueue[0].line1,MessageQueue[0].line2)
-            MessageQueue.pop(0)
-        elif len(MessageQueue) == 0 and not(ScreenInstance.display) and len(RssMessage) > 0:
+        if len(self.MessageQueue) > 0 and not(ScreenInstance.display):
+            print('line1:{} line2:{}'.format(self.MessageQueue[0].line1,self.MessageQueue[0].line2))
+            ScreenInstance.textmessagerecieved(self.MessageQueue[0].line1,self.MessageQueue[0].line2)
+            self.MessageQueue.pop(0)
+        elif len(self.MessageQueue) == 0 and not(ScreenInstance.display) and len(self.RssMessage) > 0:
              toShow = 0
-             for val in RssMessage:
+             for val in self.RssMessage:
                  if val.displayed == True:
                      toShow+=1
-             print("displaing: {}".format(RssMessage[toShow].line2))
-             ScreenInstance.textmessagerecieved(RssMessage[toShow].line1,RssMessage[toShow].line2)
-             RssMessage[toShow].displayed = True
+             print("displaing: {}".format(self.RssMessage[toShow].line2))
+             ScreenInstance.textmessagerecieved(self.RssMessage[toShow].line1,self.RssMessage[toShow].line2)
+             self.RssMessage[toShow].displayed = True
 
 
     def AddMessage(line1, line2):        
-        MessageQueue.append(msg.Message(line1,lin2))
+        self.MessageQueue.append(msg.Message(line1,lin2))
 
     def AddRssMessage(line1,line2):
          msgtoprint = msg.Message(line1,line2)
-         if len(RssMessage) > 0:
+         if len(self.RssMessage) > 0:
                 found = False
-                for val in RssMessage:
+                for val in self.RssMessage:
                   if msgtoprint.line2 == val.line2:
                       found = True
                 if found == False:
                  print("added: {}".format(post.title))
-                 RssMessage.append(msgtoprint)
+                 self.RssMessage.append(msgtoprint)
          else:
-                RssMessage.append(msgtoprint)
+                self.RssMessage.append(msgtoprint)
