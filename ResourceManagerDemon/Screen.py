@@ -1,10 +1,5 @@
 import Adafruit_CharLCD as LCD #this thing must go, i need to use a new library, not a discontinued one
 import time as timeExec
-import subprocess
-import os
-import psutil
-import datetime
-import time
 
 class Screen(object):
    # Raspberry Pi pin setup

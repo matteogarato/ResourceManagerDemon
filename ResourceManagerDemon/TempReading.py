@@ -1,6 +1,4 @@
 import Adafruit_DHT                                          
-import time
-import threading
 
 class TempReading(object):
    DHT11 = Adafruit_DHT.DHT11                                   

@@ -5,7 +5,6 @@ import TempReading
 from SSLMessage import SSLMessage as command
 import SSLMessage as SSLMessageStatic
 import json
-import time
 import MessageConsumer
 import RssReader
 
