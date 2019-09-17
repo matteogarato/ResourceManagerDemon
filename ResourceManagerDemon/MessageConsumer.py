@@ -40,7 +40,7 @@ class MessageConsumer(object):
                   if msgtoprint.line2 is val.line2:
                       found = True
                 if found is False:
-                 print("added: {}".format(post.title))
+                 print("added: {}".format(line2))
                  self.RssMessage.append(msgtoprint)
          else:
                 self.RssMessage.append(msgtoprint)
