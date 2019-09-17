@@ -13,7 +13,7 @@ class MessageConsumer(object):
         thread.start()
 
     def run(self):
-        while true:
+        while True:
             messageQueueRemover()
 
     def messageQueueRemover(self):
