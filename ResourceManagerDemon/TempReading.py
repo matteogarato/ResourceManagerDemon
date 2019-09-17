@@ -24,7 +24,7 @@ class TempReading(object):
    
    def getTemperature(self):
        self.temperatureHumidityReading()
-       if len(self.temp) > 0:
+       if self.temp:
            sumTemp = 0
            for i in range(0,len(self.temp),1):
                sumTemp+=self.temp[i]
@@ -34,7 +34,7 @@ class TempReading(object):
    
    def getHumidity(self):
        self.temperatureHumidityReading()
-       if len(self.humi) > 0:
+       if self.humi:
            sumHumi = 0
            for i in range(0,len(self.humi),1):
                sumHumi+=self.humi[i]

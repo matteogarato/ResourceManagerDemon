@@ -18,14 +18,14 @@ class MessageConsumer(object):
 
     def messageQueueRemover(self):
         print('Display message')
-        if len(self.MessageQueue) > 0 and not(ScreenInstance.display):
+        if self.MessageQueue and not(ScreenInstance.display):
             print('line1:{} line2:{}'.format(self.MessageQueue[0].line1,self.MessageQueue[0].line2))
             ScreenInstance.textmessagerecieved(self.MessageQueue[0].line1,self.MessageQueue[0].line2)
             self.MessageQueue.pop(0)
-        elif len(self.MessageQueue) == 0 and not(ScreenInstance.display) and len(self.RssMessage) > 0:
+        elif not(self.MessageQueue) and not(ScreenInstance.display) and self.RssMessage:
              toShow = 0
              for val in self.RssMessage:
-                 if val.displayed == True:
+                 if val.displayed is True:
                      toShow+=1
              print("displaing: {}".format(self.RssMessage[toShow].line2))
              ScreenInstance.textmessagerecieved(self.RssMessage[toShow].line1,self.RssMessage[toShow].line2)
@@ -37,12 +37,12 @@ class MessageConsumer(object):
 
     def AddRssMessage(line1,line2):
          msgtoprint = msg.Message(line1,line2)
-         if len(self.RssMessage) > 0:
+         if self.RssMessage:
                 found = False
                 for val in self.RssMessage:
-                  if msgtoprint.line2 == val.line2:
+                  if msgtoprint.line2 is val.line2:
                       found = True
-                if found == False:
+                if found is False:
                  print("added: {}".format(post.title))
                  self.RssMessage.append(msgtoprint)
          else:
