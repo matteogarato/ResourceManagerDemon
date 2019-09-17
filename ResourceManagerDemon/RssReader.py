@@ -12,7 +12,7 @@ class RssReader(object):
         thread.start()
 
     def run(self):
-        while true:
+        while True:
            readRSS()
            time.sleep(300)
 
