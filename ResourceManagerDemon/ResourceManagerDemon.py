@@ -80,9 +80,9 @@ def main():
     bindsocket = socket.socket()
     bindsocket.bind(('', 10023))
     bindsocket.listen(5)
-    readRSSThread = threading.Thread(target=readRSS(), daemon=True)   
-    readRSSThread.start()
+    print('MessageConsumerIstance')
     MessageConsumerIstance = MessageConsumer.MessageConsumer()
+    print('RssReaderIstance')
     RssReaderIstance = RssReader.RssReader(MessageConsumerIstance)
     while True:
         readMessage(bindsocket)
