@@ -10,7 +10,6 @@ import RssReader
 
 TempReadingInstance = TempReading.TempReading()
 MessageConsumerIstance = MessageConsumer.MessageConsumer()
-RssReaderIstance = RssReader.RssReader() 
 
 def readMessage(bindsocket):
     print('readMessage')
