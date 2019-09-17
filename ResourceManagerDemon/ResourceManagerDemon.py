@@ -77,13 +77,13 @@ def readTemperature(parametersdict):
 
 
 def main():
-    bindsocket = socket.socket()
-    bindsocket.bind(('', 10023))
-    bindsocket.listen(5)
     print('MessageConsumerIstance')
     MessageConsumerIstance = MessageConsumer.MessageConsumer()
     print('RssReaderIstance')
     RssReaderIstance = RssReader.RssReader(MessageConsumerIstance)
+    bindsocket = socket.socket()
+    bindsocket.bind(('', 10023))
+    bindsocket.listen(5)
     while True:
         readMessage(bindsocket)
 
