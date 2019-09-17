@@ -1,6 +1,7 @@
 import feedparser
 import MessageConsumer
 import threading
+import time
 class RssReader(object):
     MessageConsumerIstance = MessageConsumer.MessageConsumer()
 
