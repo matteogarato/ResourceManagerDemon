@@ -14,22 +14,19 @@ class MessageConsumer(object):
 
     def run(self):
         while True:
-            messageQueueRemover()
-
-    def messageQueueRemover(self):
-        print('Display message')
-        if self.MessageQueue and not(ScreenInstance.display):
-            print('line1:{} line2:{}'.format(self.MessageQueue[0].line1,self.MessageQueue[0].line2))
-            ScreenInstance.textmessagerecieved(self.MessageQueue[0].line1,self.MessageQueue[0].line2)
-            self.MessageQueue.pop(0)
-        elif not(self.MessageQueue) and not(ScreenInstance.display) and self.RssMessage:
-             toShow = 0
-             for val in self.RssMessage:
-                 if val.displayed is True:
-                     toShow+=1
-             print("displaing: {}".format(self.RssMessage[toShow].line2))
-             ScreenInstance.textmessagerecieved(self.RssMessage[toShow].line1,self.RssMessage[toShow].line2)
-             self.RssMessage[toShow].displayed = True
+            print('Display message')
+            if self.MessageQueue and not(ScreenInstance.display):
+                print('line1:{} line2:{}'.format(self.MessageQueue[0].line1,self.MessageQueue[0].line2))
+                ScreenInstance.textmessagerecieved(self.MessageQueue[0].line1,self.MessageQueue[0].line2)
+                self.MessageQueue.pop(0)
+            elif not(self.MessageQueue) and not(ScreenInstance.display) and self.RssMessage:
+                 toShow = 0
+                 for val in self.RssMessage:
+                     if val.displayed is True:
+                         toShow+=1
+                 print("displaing: {}".format(self.RssMessage[toShow].line2))
+                 ScreenInstance.textmessagerecieved(self.RssMessage[toShow].line1,self.RssMessage[toShow].line2)
+                 self.RssMessage[toShow].displayed = True
 
 
     def AddMessage(line1, line2):        
