@@ -76,8 +76,6 @@ def readTemperature(parametersdict):
 
 
 def main():
-    print('MessageConsumerIstance')
-    MessageConsumerIstance = MessageConsumer.MessageConsumer()
     print('RssReaderIstance')
     RssReaderIstance = RssReader.RssReader(MessageConsumerIstance)
     bindsocket = socket.socket()
