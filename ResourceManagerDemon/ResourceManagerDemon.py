@@ -66,6 +66,7 @@ def displayMessage(parametersdict):
 def readTemperature(parametersdict):
     try:
         print('enter readTemperature')
+        TempReadingInstance = TempReading.TempReading()
         temp = TempReadingInstance.getTemperature()
         hum = TempReadingInstance.getHumidity()
         print('exit from readTemperature')
