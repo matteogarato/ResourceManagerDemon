@@ -1,4 +1,5 @@
 import Adafruit_DHT                                          
+import threading
 
 class TempReading(object):
    DHT11 = Adafruit_DHT.DHT11                                   
@@ -6,6 +7,16 @@ class TempReading(object):
    temp = []
    humi = []
    reading = False
+
+   def __init__(self, interval=1):
+        self.interval = interval
+        thread = threading.Thread(target=self.run, args=())
+        thread.daemon = True
+        thread.start()
+
+   def run(self):
+       temperatureHumidityReading(self)
+
   
    def temperatureHumidityReading(self):
         if not self.reading:

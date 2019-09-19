@@ -1,5 +1,5 @@
 import Adafruit_CharLCD as LCD #this thing must go, i need to use a new library, not a discontinued one
-import time as timeExec
+import time
 
 class Screen(object):
    # Raspberry Pi pin setup
@@ -28,9 +28,9 @@ class Screen(object):
            for i in range(0, chardiffLine2 + 1):
                self.lcd.clear()
                self.lcd.message("{}\n{}".format((line1).center(16),line2[i:16 + i]))
-               timeExec.sleep(0.6)
+               time.sleep(0.6)
        else:
            self.lcd.clear()
            self.lcd.message("{}\n{}".format((line1).center(16),(line2).center(16)))
-       timeExec.sleep(20)
+       time.sleep(20)
        self.display = False
