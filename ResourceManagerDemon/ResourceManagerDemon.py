@@ -8,7 +8,6 @@ import json
 import MessageConsumer
 import RssReader
 
-TempReadingInstance = TempReading.TempReading()
 MessageConsumerIstance = MessageConsumer.MessageConsumer()
 
 def readMessage(bindsocket):
@@ -65,10 +64,7 @@ def displayMessage(parametersdict):
 
 def readTemperature(parametersdict):
     try:
-        print('enter readTemperature')
-        TempReadingInstance = TempReading.TempReading()
-        temp = TempReadingInstance.getTemperature()
-        hum = TempReadingInstance.getHumidity()
+        hum,temp = TempReading.TempReading()
         print('exit from readTemperature')
         print('T:{};H:{}'.format(temp,hum))
         return b'T:{};H:{}'.format(temp,hum)
