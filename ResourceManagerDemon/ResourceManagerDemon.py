@@ -79,7 +79,10 @@ def main():
     bindsocket.bind(('', 10023))
     bindsocket.listen(5)
     while True:
-        readMessage(bindsocket)
-
+        try:
+            readMessage(bindsocket)
+        except Exception as e:
+                print(e)
+                #todo error managemant aka thread restart
 if __name__ == '__main__':
     main()

@@ -13,6 +13,7 @@ class TempReading(object):
         thread.start()
 
    def run(self):
+       try:
         if not self.reading:
            self.reading = True
            print('temperatureHumidityReading')
@@ -25,3 +26,6 @@ class TempReading(object):
                 self.humi.append(umi)
            reading = False
            return umi,temp
+       except Exception as e:
+        print(e)
+        #todo error managemant aka thread restart
