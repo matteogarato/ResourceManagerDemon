@@ -13,9 +13,9 @@ class MessageConsumer(object):
         thread.start()
 
     def run(self):
+
         while True:
             try:
-                print('Display message')
                 if self.MessageQueue and not(self.ScreenInstance.display):
                     print('line1:{} line2:{}'.format(self.MessageQueue[0].line1,self.MessageQueue[0].line2))
                     self.ScreenInstance.textmessagerecieved(self.MessageQueue[0].line1,self.MessageQueue[0].line2)

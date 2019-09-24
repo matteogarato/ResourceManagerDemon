@@ -38,3 +38,8 @@ class Screen(object):
             time.sleep(2)
             self.lcd.clear()
             self.display = False
+
+
+   def ClearScreen():
+        self.lcd.clear()
+        self.display = False
