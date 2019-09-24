@@ -72,11 +72,11 @@ def main():
     print('Read Configuration')
     configParser.read(configFilePath)
     addressList = configParser.get('RSSCONFIG', 'urls').split(',')
-    portReading = configParser.get('SSLCONFIG', 'port')
+    portReading = int(configParser.get('SSLCONFIG', 'port'))
     print('RssReaderIstance')
     RssReaderIstance = RssReader.RssReader(MessageConsumerIstance,addressList)
     bindsocket = socket.socket()
-    bindsocket.bind(('', portReading))#todo: config file
+    bindsocket.bind(('', portReading))
     bindsocket.listen(5)
     while True:
         try:
