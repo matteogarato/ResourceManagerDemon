@@ -8,8 +8,8 @@ class RssReader(object):
     SleepIntervalSecond = 300
 
     def __init__(self,MessageConsumer,sourceList,interval=1):
-        self.SleepIntervalSecond = sleepInterval
         self.MessageConsumerIstance = MessageConsumer
+        self.SourceList=sourceList
         thread = threading.Thread(target=self.run, args=())
         thread.daemon = True
         thread.start()
