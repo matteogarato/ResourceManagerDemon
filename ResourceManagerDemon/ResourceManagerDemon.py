@@ -9,6 +9,8 @@ import MessageConsumer
 import RssReader
 
 MessageConsumerIstance = MessageConsumer.MessageConsumer()
+configParser = configparser.RawConfigParser()
+configFilePath = r'ResourceDemon.config'
 
 def readMessage(bindsocket):
     print('readMessage')
@@ -16,8 +18,8 @@ def readMessage(bindsocket):
     print('newsocket')
     connstream = ssl.wrap_socket(newsocket,
                              server_side=True,
-                             certfile="server.crt",
-                             keyfile="server.key")
+                             certfile="server.crt",#todo: config file
+                             keyfile="server.key")#todo: config file
     print('connstream')
     try:
         clientMessageDispatcher(connstream)
@@ -46,12 +48,6 @@ def as_sslMessage(dct):
     return dct
 
 
-def readConfig():
-    configParser = configparser.RawConfigParser()
-    configFilePath = r'ResourceDemon.config'
-    configParser.read(configFilePath)
-
-
 def displayMessage(parametersdict):
     try:
         print('enter displayMessage')
@@ -73,10 +69,14 @@ def readTemperature(parametersdict):
 
 
 def main():
+    print('Read Configuration')
+    configParser.read(configFilePath)
+    addressList = configParser.get('RSSCONFIG', 'urls').split(',')
+    portReading = configParser.get('SSLCONFIG', 'port')
     print('RssReaderIstance')
-    RssReaderIstance = RssReader.RssReader(MessageConsumerIstance)
+    RssReaderIstance = RssReader.RssReader(MessageConsumerIstance,addressList)
     bindsocket = socket.socket()
-    bindsocket.bind(('', 10023))
+    bindsocket.bind(('', portReading))#todo: config file
     bindsocket.listen(5)
     while True:
         try:

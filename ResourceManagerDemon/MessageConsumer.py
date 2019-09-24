@@ -20,7 +20,7 @@ class MessageConsumer(object):
                         print('line1:{} line2:{}'.format(self.MessageQueue[0].line1,self.MessageQueue[0].line2))
                         self.ScreenInstance.textmessagerecieved(self.MessageQueue[0].line1,self.MessageQueue[0].line2)
                         self.MessageQueue.pop(0)
-                    elif not(self.MessageQueue) and not(self.ScreenInstance.display) and self.RssMessage:
+                    elif not(self.MessageQueue) and not(self.ScreenInstance.display) and self.RssMessage:#todo: add a config to turn off rss display
                          toShow = 0
                          for val in self.RssMessage:
                              if val.displayed is True:
