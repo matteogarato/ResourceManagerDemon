@@ -27,5 +27,4 @@ class TempReading(object):
            reading = False
            return umi,temp
        except Exception as e:
-        print(e)
-        #todo error managemant aka thread restart
+        print(e)        

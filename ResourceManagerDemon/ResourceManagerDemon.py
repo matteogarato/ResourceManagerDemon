@@ -72,6 +72,7 @@ def main():
     print('Read Configuration')
     configParser.read(configFilePath)
     addressList = configParser.get('RSSCONFIG', 'urls').split(',')
+
     portReading = configParser.get('SSLCONFIG', 'port')
     print('RssReaderIstance')
     RssReaderIstance = RssReader.RssReader(MessageConsumerIstance,addressList)
