@@ -18,7 +18,7 @@ class RssReader(object):
         while True:
             try:
                 print('readRSS')
-                for address in self.SouceList:
+                for address in self.SourceList:
                     feed = feedparser.parse(address)
                     for post in feed.entries:
                       date = "(%d/%02d/%02d)" % (post.published_parsed.tm_mday , post.published_parsed.tm_mon, post.published_parsed.tm_year)            
