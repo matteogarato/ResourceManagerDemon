@@ -10,7 +10,7 @@ import RssReader
 
 MessageConsumerIstance = MessageConsumer.MessageConsumer()
 configParser = configparser.RawConfigParser()
-configFilePath = r'ResourceDemon.config'
+configFilePath = r'ResourceManagerDemon.Config'
 
 def readMessage(bindsocket):
     print('readMessage')
@@ -72,7 +72,6 @@ def main():
     print('Read Configuration')
     configParser.read(configFilePath)
     addressList = configParser.get('RSSCONFIG', 'urls').split(',')
-
     portReading = configParser.get('SSLCONFIG', 'port')
     print('RssReaderIstance')
     RssReaderIstance = RssReader.RssReader(MessageConsumerIstance,addressList)
