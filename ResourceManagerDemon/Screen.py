@@ -30,7 +30,7 @@ class Screen(object):
                 for i in range(0, chardiffLine2 + 1):
                     self.lcd.clear()
                     self.lcd.message("{}\n{}".format((line1).center(16),line2[i:16 + i]))
-                    print("rotating:{}\n{}".format((line1).center(16),line2[i:16 + i]))
+                    #print("rotating:{}\n{}".format((line1).center(16),line2[i:16 + i]))
                     time.sleep(0.6)
             else:
                 self.lcd.clear()
