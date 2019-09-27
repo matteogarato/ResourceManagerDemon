@@ -7,6 +7,8 @@ import SSLMessage as SSLMessageStatic
 import json
 import MessageConsumer
 import RssReader
+import ptvsd
+ptvsd.enable_attach()
 
 MessageConsumerIstance = MessageConsumer.MessageConsumer()
 configParser = configparser.RawConfigParser()
