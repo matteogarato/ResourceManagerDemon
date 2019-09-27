@@ -51,11 +51,10 @@ def as_sslMessage(dct):
 def displayMessage(parametersdict):
     try:
         print('enter displayMessage')
-        print (parametersdict)
+        print(parametersdict)
         print(parametersdict['line1'])
         print(parametersdict['line2'])
-        msgtoprint = msg.Message(parametersdict['line1'],parametersdict['line2'])
-        MessageConsumerIstance.AddRssMessage(date,post.title)
+        MessageConsumerIstance.AddRssMessage(parametersdict['line1'],parametersdict['line2'])
         print('exit from displayMessage')
         return b'OK'
     except Exception as e:
