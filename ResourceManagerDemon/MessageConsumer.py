@@ -16,9 +16,10 @@ class MessageConsumer(object):
 
         while True:
             try:
+                print("length of MessageQueue:{} value of display:{}".format(self.MessageQueue.count,self.ScreenInstance.display))
                 if self.MessageQueue and not(self.ScreenInstance.display):
                     print('line1:{} line2:{}'.format(self.MessageQueue[0].line1,self.MessageQueue[0].line2))
-                    self.ScreenInstance.textmessagerecieved(self.MessageQueue[0].line1,self.MessageQueue[0].line2)
+                    self.ScreenInstance.showMessage(self.MessageQueue[0].line1,self.MessageQueue[0].line2)
                     self.MessageQueue.pop(0)
                 elif not(self.MessageQueue) and not(self.ScreenInstance.display) and self.RssMessage:
                      toShow = 0
@@ -26,7 +27,7 @@ class MessageConsumer(object):
                          if val.displayed is True:
                              toShow+=1
                      print("displaing: {}".format(self.RssMessage[toShow].line2))
-                     self.ScreenInstance.textmessagerecieved(self.RssMessage[toShow].line1,self.RssMessage[toShow].line2)
+                     self.ScreenInstance.showMessage(self.RssMessage[toShow].line1,self.RssMessage[toShow].line2)
                      self.RssMessage[toShow].displayed = True
             except Exception as e:
                     print(e)                    
