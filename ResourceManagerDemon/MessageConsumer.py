@@ -15,8 +15,7 @@ class MessageConsumer(object):
     def run(self):
 
         while True:
-            try:
-                print("length of MessageQueue:{} value of display:{}".format(self.MessageQueue.count,self.ScreenInstance.display))
+            try:                
                 if self.MessageQueue and not(self.ScreenInstance.display):
                     print('line1:{} line2:{}'.format(self.MessageQueue[0].line1,self.MessageQueue[0].line2))
                     self.ScreenInstance.showMessage(self.MessageQueue[0].line1,self.MessageQueue[0].line2)
