@@ -31,7 +31,8 @@ class MessageConsumer(object):
             except Exception as e:
                     print(e)                    
 
-    def AddMessage(self,line1, line2):        
+    def AddMessage(self,line1, line2):  
+        print('aggiunta messaggio')
         self.MessageQueue.append(msg.Message(line1,lin2))
 
     def AddRssMessage(self,line1,line2):
