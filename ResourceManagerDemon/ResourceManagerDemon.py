@@ -54,7 +54,7 @@ def displayMessage(parametersdict):
     try:
         print('enter displayMessage')
         breakpoint()
-        MessageConsumerIstance.AddRssMessage(parametersdict['line1'],parametersdict['line2'])
+        MessageConsumerIstance.AddMessage(parametersdict['line1'],parametersdict['line2'])
         print('exit from displayMessage')
         return b'OK'
     except Exception as e:
