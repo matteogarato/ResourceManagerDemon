@@ -33,7 +33,7 @@ class MessageConsumer(object):
 
     def AddMessage(self,line1, line2):  
         print('aggiunta messaggio')
-        self.MessageQueue.append(msg.Message(line1,lin2))
+        self.MessageQueue.append(msg.Message(line1,line2))
 
     def AddRssMessage(self,line1,line2):
          msgtoprint = msg.Message(line1,line2)
