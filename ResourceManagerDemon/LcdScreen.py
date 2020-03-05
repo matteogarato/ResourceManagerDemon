@@ -1,7 +1,7 @@
 import Adafruit_CharLCD as LCD #this thing must go, i need to use a new library, not a discontinued one
 import time
 
-class Screen(object):
+class LcdScreen(object):
    # Raspberry Pi pin setup
    lcd_rs = 18
    lcd_en = 23
