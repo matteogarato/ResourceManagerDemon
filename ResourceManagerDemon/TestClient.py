@@ -1,6 +1,6 @@
-import client
+import Client
 
 if __name__ is '__main__':
-    clientInstance = client.Client()
+    clientInstance = Client.Client("192.168.3.XX")
     readed=clientInstance.readTemp()
     print(readed)

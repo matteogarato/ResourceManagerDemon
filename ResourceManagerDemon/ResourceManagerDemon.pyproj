@@ -39,7 +39,7 @@
     <Compile Include="RssReader.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Screen.py">
+    <Compile Include="LcdScreen.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SSLMessage.py">
