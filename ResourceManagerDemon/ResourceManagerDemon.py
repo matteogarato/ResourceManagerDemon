@@ -7,10 +7,12 @@ import SSLMessage as SSLMessageStatic
 import json
 import MessageConsumer
 import RssReader
-import ptvsd
-ptvsd.enable_attach()
+import ApiCaller
+#import ptvsd
+#ptvsd.enable_attach()
 
 MessageConsumerIstance = MessageConsumer.MessageConsumer()
+ApiCallerInstance = ApiCaller.ApiCaller("")
 configParser = configparser.RawConfigParser()
 configFilePath = r'ResourceManagerDemon.Config'
 
@@ -76,6 +78,7 @@ def main():
     portReading = int(configParser.get('SSLCONFIG', 'port'))
     print('RssReaderIstance')
     RssReaderIstance = RssReader.RssReader(MessageConsumerIstance,addressList)
+    ApiCallerInstance = ApiCaller.ApiCaller(configParser.get('API', 'BaseUrl'))
     bindsocket = socket.socket()
     bindsocket.bind(('', portReading))
     bindsocket.listen(5)
