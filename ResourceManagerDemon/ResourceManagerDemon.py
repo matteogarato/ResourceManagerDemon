@@ -70,6 +70,15 @@ def readTemperature(parametersdict):
     except Exception as e:
         return e.args
 
+def verifyCode(parametersdict):
+    try:
+        result = ApiCaller.ApiCaller.callPlateVerificationApi(parametersdict['Code'])
+        print('exit from readTemperature')
+        print('T:{};H:{}'.format(temp,hum))
+        return b'T:{};H:{}'.format(temp,hum)
+    except Exception as e:
+        return e.args
+
 
 def main():
     print('Read Configuration')
