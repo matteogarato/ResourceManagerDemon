@@ -29,6 +29,9 @@
     <Compile Include="Client.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GateOpener.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Message.py">
       <SubType>Code</SubType>
     </Compile>
@@ -66,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ResourceManagerDemon.Config" />
+    <Content Include="TODOWork.md" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

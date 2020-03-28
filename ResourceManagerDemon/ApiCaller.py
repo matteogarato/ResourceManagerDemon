@@ -15,3 +15,7 @@ class ApiCaller(object):
         url = self.baseUrl + '/CardVerification/' + readedCode
         response = requests.post(url,'')
         return response
+    
+    def deserializeResponse(response):
+        ##TODO: convert the response and generate a message to be dispayed
+        response
