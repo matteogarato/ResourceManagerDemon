@@ -15,7 +15,7 @@ class GateOpener(object):
         GPIO.setup(RELAIS_1_GPIO, GPIO.OUT) # GPIO Assign mode
 
     def Open(readedCode):
-        result = ApiCaller.ApiCaller.callCardVerificationApi(readedCode)
+        result = ApiCaller.ApiCaller.codeVerificationApi(readedCode)
         GPIO.output(RELAIS_1_GPIO, GPIO.HIGH) # on
         time.sleep(OPEN_INTERVAL)
         GPIO.output(RELAIS_1_GPIO, GPIO.LOW) # off
