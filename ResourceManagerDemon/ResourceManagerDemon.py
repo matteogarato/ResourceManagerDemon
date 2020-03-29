@@ -6,13 +6,11 @@ from SSLMessage import SSLMessage as command
 import SSLMessage as SSLMessageStatic
 import json
 import MessageConsumer
+import GateOpener
 import RssReader
-import ApiCaller
-#import ptvsd
-#ptvsd.enable_attach()
 
 MessageConsumerIstance = MessageConsumer.MessageConsumer()
-ApiCallerInstance = ApiCaller.ApiCaller("")
+GateOpenerInstance = GateOpener.GateOpener(0,0,"")
 configParser = configparser.RawConfigParser()
 configFilePath = r'ResourceManagerDemon.Config'
 
@@ -38,26 +36,30 @@ def clientMessageDispatcher(connstream):
         print('decoded:{}'.format(data))
         data = json.loads(data)
         recived = json.loads(data, object_hook = as_sslMessage)
-        sslMessage = command(recived[0],recived[1])
-        commandRecived = sslMessage.command
-        result = globals()[sslMessage.command](sslMessage.parameters)
-        connstream.write(result)
+        if (recived is not None):
+            sslMessage = command(recived[0],recived[1])
+            commandRecived = sslMessage.command
+            result = globals()[sslMessage.command](sslMessage.parameters)
+            connstream.write(result)
     except Exception as e:
         print(e)
         main()
 
 def as_sslMessage(dct):
-    if '__SSLMessage__' in dct:
+    if '__SSLMessage__' in dct and dct['command'] is not None and dct['command'] and dct['parameters'] is not None and dct['parameters']:
         return command(dct['command'], dct['parameters'])
-    return dct
+    return None
 
 
 def displayMessage(parametersdict):
     try:
-        print('enter displayMessage')
-        MessageConsumerIstance.AddMessage(parametersdict['line1'],parametersdict['line2'])
-        print('exit from displayMessage')
-        return b'OK'
+        if (parametersdict['line1'] is not None and parametersdict['line1'] and parametersdict['line2'] is not None and parametersdict['line2']):
+            print('enter displayMessage')
+            MessageConsumerIstance.AddMessage(parametersdict['line1'],parametersdict['line2'])
+            print('exit from displayMessage')
+            return b'OK'
+        else:
+            return b'invalid parameters'
     except Exception as e:
         return e.args
 
@@ -72,10 +74,11 @@ def readTemperature(parametersdict):
 
 def verifyCode(parametersdict):
     try:
-        result = ApiCaller.ApiCaller.callPlateVerificationApi(parametersdict['Code'])
-        print('exit from readTemperature')
-        print('T:{};H:{}'.format(temp,hum))
-        return b'T:{};H:{}'.format(temp,hum)
+        if (parametersdict['Code'] is not None and parametersdict['Code']):
+            result = GateOpenerInstance.Open(parametersdict['Code'])
+            return b'OK'
+        else:
+            return b'invalid parameters'
     except Exception as e:
         return e.args
 
@@ -83,11 +86,11 @@ def verifyCode(parametersdict):
 def main():
     print('Read Configuration')
     configParser.read(configFilePath)
-    addressList = configParser.get('RSSCONFIG', 'urls').split(',')
     portReading = int(configParser.get('SSLCONFIG', 'port'))
-    print('RssReaderIstance')
-    RssReaderIstance = RssReader.RssReader(MessageConsumerIstance,addressList)
-    ApiCallerInstance = ApiCaller.ApiCaller(configParser.get('API', 'BaseUrl'))
+    if(configParser.get('RSSCONFIG', 'enabled')):
+        addressList = configParser.get('RSSCONFIG', 'urls').split(',')
+        RssReaderIstance = RssReader.RssReader(MessageConsumerIstance,addressList)
+    GateOpenerInstance = GateOpener.GateOpener(configParser.get('GATE', 'GpioPin'),configParser.get('GATE', 'openInterval'),configParser.get('API', 'BaseUrl'))
     bindsocket = socket.socket()
     bindsocket.bind(('', portReading))
     bindsocket.listen(5)
