@@ -9,7 +9,7 @@ import json
 import GateOpener
 #import RssReader
 
-MessageConsumerIstance = MessageConsumer.MessageConsumer()
+#MessageConsumerIstance = MessageConsumer.MessageConsumer()
 GateOpenerInstance = GateOpener.GateOpener(0,0,"")
 configParser = configparser.RawConfigParser()
 configFilePath = r'ResourceManagerDemon.Config'
