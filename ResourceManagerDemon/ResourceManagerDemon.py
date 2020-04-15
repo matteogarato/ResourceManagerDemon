@@ -1,7 +1,7 @@
 import socket
 import ssl
 import configparser
-import TempReading
+#import TempReading
 from SSLMessage import SSLMessage as command
 import SSLMessage as SSLMessageStatic
 import json
@@ -25,12 +25,12 @@ def readMessage(bindsocket):
     print('connstream')
     try:
         clientMessageDispatcher(connstream)
-    finally:       
+    finally:
         connstream.close()
 def clientMessageDispatcher(connstream):
     try:
         print('clientMessageDispatcher')
-        data = connstream.read() 
+        data = connstream.read()
         print('data:{}'.format(data))
         data = data.decode('utf-8')
         print('decoded:{}'.format(data))
@@ -63,15 +63,14 @@ def displayMessage(parametersdict):
     except Exception as e:
         return e.args
 
-def readTemperature(parametersdict):
-    try:
-        hum,temp = TempReading.TempReading()
-        print('exit from readTemperature')
-        print('T:{};H:{}'.format(temp,hum))
-        return b'T:{};H:{}'.format(temp,hum)
-    except Exception as e:
-        return e.args
-
+#def readTemperature(parametersdict):
+#    try:
+#        hum,temp = TempReading.TempReading()
+#        print('exit from readTemperature')
+#        print('T:{};H:{}'.format(temp,hum))
+#        return b'T:{};H:{}'.format(temp,hum)
+#    except Exception as e:
+#        return e.args
 def verifyCode(parametersdict):
     try:
         if (parametersdict['Code'] is not None and parametersdict['Code']):
