@@ -7,7 +7,7 @@ import SSLMessage as SSLMessageStatic
 import json
 #import MessageConsumer
 import GateOpener
-import RssReader
+#import RssReader
 
 MessageConsumerIstance = MessageConsumer.MessageConsumer()
 GateOpenerInstance = GateOpener.GateOpener(0,0,"")
@@ -86,9 +86,9 @@ def main():
     print('Read Configuration')
     configParser.read(configFilePath)
     portReading = int(configParser.get('SSLCONFIG', 'port'))
-    if(configParser.get('RSSCONFIG', 'enabled')):
-        addressList = configParser.get('RSSCONFIG', 'urls').split(',')
-        RssReaderIstance = RssReader.RssReader(MessageConsumerIstance,addressList)
+    #if(configParser.get('RSSCONFIG', 'enabled')):
+    #    addressList = configParser.get('RSSCONFIG', 'urls').split(',')
+    #    RssReaderIstance = RssReader.RssReader(MessageConsumerIstance,addressList)
     GateOpenerInstance = GateOpener.GateOpener(configParser.get('GATE', 'GpioPin'),configParser.get('GATE', 'openInterval'),configParser.get('API', 'BaseUrl'))
     bindsocket = socket.socket()
     bindsocket.bind(('', portReading))
