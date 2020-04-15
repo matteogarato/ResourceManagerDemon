@@ -5,7 +5,7 @@ import configparser
 from SSLMessage import SSLMessage as command
 import SSLMessage as SSLMessageStatic
 import json
-import MessageConsumer
+#import MessageConsumer
 import GateOpener
 import RssReader
 
@@ -51,17 +51,17 @@ def as_sslMessage(dct):
     return None
 
 
-def displayMessage(parametersdict):
-    try:
-        if (parametersdict['line1'] is not None and parametersdict['line1'] and parametersdict['line2'] is not None and parametersdict['line2']):
-            print('enter displayMessage')
-            MessageConsumerIstance.AddMessage(parametersdict['line1'],parametersdict['line2'])
-            print('exit from displayMessage')
-            return b'OK'
-        else:
-            return b'invalid parameters'
-    except Exception as e:
-        return e.args
+#def displayMessage(parametersdict):
+#    try:
+#        if (parametersdict['line1'] is not None and parametersdict['line1'] and parametersdict['line2'] is not None and parametersdict['line2']):
+#            print('enter displayMessage')
+#            MessageConsumerIstance.AddMessage(parametersdict['line1'],parametersdict['line2'])
+#            print('exit from displayMessage')
+#            return b'OK'
+#        else:
+#            return b'invalid parameters'
+#    except Exception as e:
+#        return e.args
 
 #def readTemperature(parametersdict):
 #    try:
